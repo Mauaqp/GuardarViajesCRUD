@@ -1,6 +1,7 @@
 package com.viajes.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -28,12 +29,30 @@ public class ExpenseService {
         return expensesRepo.save(b);
     }
     // recupera un gasto
-//    public Expense findExpense(Long id) {
-//        Optional<Expense> optionalExpense = expensesRepo.findById(id);
-//        if(optionalExpense.isPresent()) {
-//            return optionalExpense.get();
-//        } else {
-//            return null;
-//        }
-//    }
+    public Expense findExpenseById(Long id) {
+        Optional<Expense> optionalExpense = expensesRepo.findById(id);
+        if(optionalExpense.isPresent()) {
+            return optionalExpense.get();
+        } else {
+            return null;
+        }
+    }
+    
+//    Actualiza gasto
+    public Expense updateExpense (Long id, Expense expense) {
+    	Optional<Expense> optional = expensesRepo.findById(id);
+    	if ( optional.isPresent()) {
+    		Expense data = optional.get();
+    		data.setName(expense.getName());
+    		data.setVendor(expense.getVendor());
+    		data.setAmmount(expense.getAmmount());
+    		data.setDescription(expense.getDescription());
+    		return this.expensesRepo.save(data);
+    	}
+    	else {
+    		return null;
+    	}
+    }
+    
+    
 }

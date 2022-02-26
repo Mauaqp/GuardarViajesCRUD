@@ -12,5 +12,5 @@ public interface ExpensesRepository extends CrudRepository<Expense, Long>{
 	List<Expense> findAll();
 	
 	List<Expense> findByName(String name);
-
+	
 }

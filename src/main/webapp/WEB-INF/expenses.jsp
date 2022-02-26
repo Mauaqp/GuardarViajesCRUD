@@ -16,7 +16,8 @@
 			<tr>
 				<td>Expense</td>
 				<td>Vendor</td>
-				<td>Ammount</td>
+				<td>Amount</td>
+				<td>Actions</td>
 			</tr>
 		</thead>
 		<tbody>	
@@ -25,6 +26,9 @@
 					<td><c:out value="${expense.getName()}"></c:out></td>
 					<td><c:out value="${expense.getVendor()}"></c:out></td>
 					<td><c:out value="${expense.getAmmount()}"></c:out></td>
+					<td>
+						<a href="/expenses/${ expense.getId() }/edit">Edit</a>
+					</td>
 				</tr>
 			</c:forEach>	
 		</tbody>
