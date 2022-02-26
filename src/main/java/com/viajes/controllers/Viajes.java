@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.viajes.models.Expense;
 import com.viajes.services.ExpenseService;
@@ -69,5 +71,20 @@ public class Viajes {
 			expenseService.updateExpense(id, expense);
 			return "redirect:/expenses";
 		}
+	}
+	
+//	Delete controller
+	@RequestMapping(value="/expenses/{id}/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
+	public String delete (@PathVariable("id") Long id) {
+		expenseService.deleteById(id);
+		return "redirect:/expenses";
+	}
+	
+//	Show Expense
+	@GetMapping("/expense/{id}/show")
+	public String showExpense ( @PathVariable("id") Long id, Model model) {
+		Expense expense = expenseService.findExpenseById(id);
+		model.addAttribute("expense", expense);
+		return "show.jsp";
 	}
 }

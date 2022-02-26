@@ -23,11 +23,15 @@
 		<tbody>	
 			<c:forEach var="expense" items="${expenses}">
 				<tr>
-					<td><c:out value="${expense.getName()}"></c:out></td>
+					<td><a href="/expense/${expense.getId()}/show"><c:out value="${expense.getName()}"></c:out></a></td>
 					<td><c:out value="${expense.getVendor()}"></c:out></td>
 					<td><c:out value="${expense.getAmmount()}"></c:out></td>
 					<td>
 						<a href="/expenses/${ expense.getId() }/edit">Edit</a>
+						<form action="/expenses/${expense.getId()}/delete" method="post">
+						    <input type="hidden" name="_method" value="delete">
+						    <input type="submit" value="Delete">
+						</form>
 					</td>
 				</tr>
 			</c:forEach>	
